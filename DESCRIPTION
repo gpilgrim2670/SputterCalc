@@ -1,0 +1,26 @@
+Package: SputterCalc
+Type: Package
+Title: Calculates sputter deposition rates for a system of given geometry
+Version: 0.1.0
+Author: Authors@R: 
+    c(person(given = "Greg",
+             family = "Pilgrim",
+             role = c("aut", "cre"),
+             email = "gpilgrim@gmail.com",
+             comment = c(ORCID = "0000-0001-7831-442X")),
+             person(given  = "Michael",
+             family = "Brazil",
+             role = c("aut"),
+             email = "mbrazil@vergason.com"))
+Maintainer: greg Pilgrim <gpilgrim@vergason.com>
+Description: Based on VTI's research and development sputter system
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+Imports: 
+    magrittr,
+    shiny,
+    ggplot2,
+    dplyr,
+    tidyr

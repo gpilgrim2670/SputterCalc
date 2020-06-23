@@ -13,6 +13,10 @@
 #' @param Interval the size of each step in a numeric solution.  Larger intervals will produce courser solutions, but will be faster.  Smaller intervals will produce more detailed solutions but will be more computationally expensive
 #'
 #' @author Greg Pilgrim \email{gpilgrim@@vergason.com}
+#'
+#' @importFrom dplyr group_by
+#' @importFrom dplyr summarise
+#' @importFrom dplyr mutate
 
 dep_data <- function(Rate,
                      Epsilon = 1,
@@ -80,17 +84,17 @@ dep_data <- function(Rate,
         angle = rep_len(seq(0, 49, 50 / max(rle(
           x
         )$lengths)) * (2 * pi / 50), length(x)),
-        radian = rep(seq(0, 6, Interval), each = max(rle(x)$lengths))
+        radius = rep(seq(0, 6, Interval), each = max(rle(x)$lengths))
       )
 
     polar_df <- polar_df %>%
       mutate(avg_dep = mean(polar, na.rm = TRUE)) %>%
       # View()
-      group_by(radian) %>%
+      group_by(radius) %>%
       summarise(dep_sum = sum(polar, na.rm = TRUE))
       # View()
-      ungroup() %>%
-      mutate(dep_rel = dep_sum/mean(dep_sum, na.rm = TRUE))
+      # ungroup() %>%
+      # mutate(dep_rel = dep_sum/mean(dep_sum, na.rm = TRUE))
       # View()
 
     return(polar_df)

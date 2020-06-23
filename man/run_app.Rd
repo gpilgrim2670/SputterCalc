@@ -7,7 +7,7 @@
 run_app()
 }
 \description{
-run_app
+used to launch shiny app
 }
 \author{
 Greg Pilgrim \email{gpilgrim@vergason.com}

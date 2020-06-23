@@ -5,6 +5,7 @@ library(tidyr)
 
 # Define server logic
 shinyServer(function(input, output) {
+    # returns deposition data for gun 1, in polar coordinates
     Gun_1_df <- reactive({
         Gun_1_df <- dep_data(
             Rate = input$Rate_1,
@@ -23,7 +24,7 @@ shinyServer(function(input, output) {
 
         return(Gun_1_df)
     })
-
+    # returns deposition data for gun 2, in polar coordinates
     Gun_2_df <- reactive({
         Gun_2_df <- dep_data(
             Rate = input$Rate_2,
@@ -43,8 +44,10 @@ shinyServer(function(input, output) {
         return(Gun_2_df)
     })
 
+    # joins gun 1 and gun 2 data
+    # calucuates relatve contributions of each gun to total deposition
     Gun_Both <- reactive({
-        Gun_Both <- left_join(Gun_1_df(), Gun_2_df(), by = "radian") %>%
+        Gun_Both <- left_join(Gun_1_df(), Gun_2_df(), by = "radius") %>%
             rowwise() %>%
             mutate(
                 dep_sum = sum(dep_sum.x, dep_sum.y),
@@ -61,11 +64,11 @@ shinyServer(function(input, output) {
 
     })
 
-
+    # plots total proportional deposition amounts by radius for each gun
     output$main_plot <- renderPlot({
         Gun_Both() %>%
             ggplot(aes(
-                x = radian,
+                x = radius,
                 y = per,
                 color = gun
             )) +

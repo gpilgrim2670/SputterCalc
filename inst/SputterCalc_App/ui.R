@@ -1,10 +1,11 @@
-
-
 library(shiny)
 
-# Define UI for application that draws a histogram
+# Define UI for application
 shinyUI(fluidPage(
     fluidRow(
+        # first column is gun 1
+        # numericInput for each gun parameter
+        # should add limits
         column(width = 2,
                h4(strong("Gun 1")),
                numericInput("Rate_1", label = "Rate", value = 1000, step = 1),
@@ -17,6 +18,9 @@ shinyUI(fluidPage(
                numericInput("Fing_1", label = "Finger", value = 4.8125, step = 0.0001),
                numericInput("Knuc_1", label = "Knuckle", value = 0.95, step = 0.00001),
                numericInput("Rot_1", label = "Rot", value = 1, step = 0.1)),
+        # second column is main plot
+        # numericInput for Interval, which will be the same for both guns
+        # displays plots
         column(width = 8,
                h4(strong("Deposition Plot")),
                numericInput("Interval", label = "Interval", value = 0.2),
@@ -24,6 +28,9 @@ shinyUI(fluidPage(
                #                label = "Select Coordinate System",
                #                choices = c("polar", "cartesian")),
                plotOutput(outputId = "main_plot")),
+        # third column is gun 2
+        # numericInput for each gun parameter
+        # should add limits
         column(width = 2,
                h4(strong("Gun 2")),
                numericInput("Rate_2", label = "Rate", value = 1000, step = 1),
